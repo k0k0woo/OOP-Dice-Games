@@ -8,22 +8,27 @@ using System.Runtime.CompilerServices;
 
 namespace OOP_Dice_Games
 {
-    internal class Game
+    abstract class Game
     {
         /// <summary>
         /// Generic game class contain things all games will need or may only vary
         /// </summary>
 
 
-        private List<Die> _diceList = new List<Die>();
+        public List<Die> _diceList = new List<Die>();
 
         private int _score = 0;
 
-        //Change path for each game otherwise it will overide the file
-        private string path = @"C:\Users\Joshi\Documents\Leaderboard.txt";
+
+        public string path = @"C:\Users\Joshi\Documents\Leaderboard.txt";
+
+        // Will be used to change the path
+        public abstract void UpdateFilePath();
+
+
         
         // Add new die to the list
-        private void _NewDie(int Sides,int numberOfDie)
+        public void _NewDie(int Sides,int numberOfDie)
         {
             for(int i = 0; i < numberOfDie; i++) 
             {
@@ -71,23 +76,31 @@ namespace OOP_Dice_Games
             return leaderboardlist;
         }
         // Update leaderboard
-        private void UpdateLeaderboard(string name, int score)
+        public void UpdateLeaderboard(string name, int score)
         {
             List<string> leaderboard = GetLeaderboard();
 
             string newPlayer = name + " "+ score;
             if (leaderboard.Count() > 0 && leaderboard.Count() < 10 && leaderboard[0] != "No High Scores")
             {
-                foreach(string player in leaderboard.ToList())
+                var breakcheck = true;
+                foreach (string player in leaderboard.ToList())
                 {
                     string[] splitPlayer = player.Split(' ');
                     if (Int32.Parse(splitPlayer[1]) < score)
                     {
                         leaderboard.Insert(leaderboard.IndexOf(player), newPlayer);
                         File.WriteAllLines(path, leaderboard);
+                        breakcheck = false;
                         break;
                     }
                 }
+                if (breakcheck)
+                {
+                    leaderboard.Add(newPlayer);
+                    File.WriteAllLines(path, leaderboard);
+                }
+                
             }
             else if(leaderboard.Count() == 10)
             {
@@ -131,6 +144,7 @@ namespace OOP_Dice_Games
 
 
         // Run on game creation
+        /*
         public Game()
         {
 
@@ -149,6 +163,6 @@ namespace OOP_Dice_Games
 
             UpdateLeaderboard("fe", total);
         }
-
+        */
     }
 }

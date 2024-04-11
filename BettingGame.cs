@@ -15,12 +15,19 @@ namespace OOP_Dice_Games
         }
         public BettingGame()
         {
+
+            // Change leaderboard path
             UpdateFilePath();
-            _NewDie(10, 6);
+
+            
+
+            // Gameplay
+
+            NewDie(10, 6);
 
             var total = 0;
 
-            foreach (Die die in _diceList)
+            foreach (Die die in diceList)
             {
                 die.Roll();
                 total += die.Value;
@@ -29,7 +36,10 @@ namespace OOP_Dice_Games
 
             Console.WriteLine("The sum of dice is {0}", total);
 
-            UpdateLeaderboard("fe", total);
+            GetName();
+
+            UpdateLeaderboard(name, total);
+            OutputLeaderboard();
         }
     }
 }

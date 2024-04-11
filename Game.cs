@@ -15,26 +15,53 @@ namespace OOP_Dice_Games
         /// </summary>
 
 
-        public List<Die> _diceList = new List<Die>();
-
-        private int _score = 0;
+        public List<Die> diceList = new List<Die>();
 
 
         public string path = @"C:\Users\Joshi\Documents\Leaderboard.txt";
 
+        public string name = "";
+
         // Will be used to change the path
         public abstract void UpdateFilePath();
 
+        public void GetName()
+        {
+            Console.WriteLine("Enter Your Name (Max-16-Character):");
 
+            string INPname = Console.ReadLine();
+
+            if (ValidateName(INPname))
+            {
+                name = INPname;
+            }
+            else
+            {
+                Console.WriteLine("{0} is an invalid name.", INPname);
+                GetName();
+            }
+        }
+
+        private bool ValidateName(string VALname)
+        {
+            if(VALname.Length > 16 || VALname.Length < 1)
+            {
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
+        }
         
         // Add new die to the list
-        public void _NewDie(int Sides,int numberOfDie)
+        public void NewDie(int Sides,int numberOfDie)
         {
             for(int i = 0; i < numberOfDie; i++) 
             {
                 string name = "Die" + (i + 1);
 
-                _diceList.Add(new Die(Sides,name));
+                diceList.Add(new Die(Sides,name));
             }
 
         }
@@ -128,13 +155,15 @@ namespace OOP_Dice_Games
 
             }
             
-            OutputLeaderboard();
         }
         // Output leaderboard
 
         public void OutputLeaderboard()
         {
             List<string> leaderboard = GetLeaderboard();
+
+            Console.WriteLine("\n\n---------Leaderboard----------");
+
 
             foreach(string player in leaderboard)
             {

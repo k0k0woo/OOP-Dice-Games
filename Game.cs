@@ -200,6 +200,15 @@ namespace OOP_Dice_Games
 
         abstract public void GameSetup();
 
+        public void GameOver(int score)
+        {
+            GetName();
+            UpdateLeaderboard(name, score);
+
+            Console.WriteLine("Game Saved...");
+
+            OutputLeaderboard();
+        }
 
         public void RollDice()
         {

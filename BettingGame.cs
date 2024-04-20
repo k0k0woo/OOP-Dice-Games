@@ -14,17 +14,17 @@ namespace OOP_Dice_Games
             path = @"C:\Users\Joshi\Documents\BettingLeaderboard.txt";
         }
 
-        private double _money;
+        private int _money;
 
 
         private int betType;
-        private double betAmount;
+        private int betAmount;
         private int betNumber;
-        public double Money { get { return _money; } set { _money = value; } }
+        public int Money { get { return _money; } set { _money = value; } }
         private bool GameLoopCheck = true;
         private void SetStartingMoney()
         {
-            Money = 100D;
+            Money = 100;
         }
 
         private void SinglesOdds()
@@ -52,7 +52,7 @@ namespace OOP_Dice_Games
             Console.WriteLine("\nPlease input betting amount:");
             var tempBetAmount = Console.ReadLine();
             
-            bool IsDouble =  Double.TryParse(tempBetAmount, out betAmount);
+            bool IsDouble =  Int32.TryParse(tempBetAmount, out betAmount);
 
             if(IsDouble == false || betAmount > Money || betAmount < 1)
             {
@@ -180,7 +180,7 @@ namespace OOP_Dice_Games
 
             Money += betAmount * multi;
 
-            Console.WriteLine("You won {0}. Your new balance is {0}",betAmount*multi,Money);
+            Console.WriteLine("You won {0}. Your new balance is {1}",betAmount*multi,Money);
         }
 
         public void Loser()
@@ -189,6 +189,7 @@ namespace OOP_Dice_Games
 
             if (BankruptCheck())
             {
+                Console.WriteLine("You have lost all money.");
                 GameLoopCheck = false;
             }
         }
@@ -210,7 +211,24 @@ namespace OOP_Dice_Games
 
         }
 
+        public void ContinueCheck()
+        {
+            Console.WriteLine("Do you want to continue y/n?");
 
+            string response = Console.ReadLine();
+
+            while(response != "y" && response != "n")
+            {
+                Console.WriteLine("invalid input try again:");
+                response = Console.ReadLine();
+            }
+
+            if(response == "n" || response == "N")
+            {
+                GameLoopCheck = false;
+
+            }
+        }
         public void GameLoop()
         {
             GetBetAmount();
@@ -218,6 +236,11 @@ namespace OOP_Dice_Games
             GetBetType();
 
             GetBetNumber();
+            if (GameLoopCheck) 
+            {
+            ContinueCheck();            
+            }
+
 
 
         }
@@ -238,6 +261,8 @@ namespace OOP_Dice_Games
             {
                 GameLoop();
             }
+
+            GameOver(Money);
 
 
 

@@ -53,7 +53,30 @@ namespace OOP_Dice_Games
                 return true;
             }
         }
-        
+
+
+        public int CheckInputInt(string number)
+        {
+            
+            int Output;
+
+            bool CheckInt = int.TryParse(number, out Output);
+
+            while (CheckInt == false)
+            {
+                Console.WriteLine("{0} is an invalid input", number);
+                
+                Console.WriteLine("Input: ");
+                var num = Console.ReadLine();
+                CheckInt = int.TryParse(num, out Output);
+
+            }
+            return Output;
+
+
+        }
+
+
         // Add new die to the list
         public void NewDie(int Sides,int numberOfDie)
         {
@@ -95,7 +118,7 @@ namespace OOP_Dice_Games
             }
             else
             {
-                File.Create(path);
+                File.Create(path).Close();
                 leaderboardlist.Add("No High Scores");
             }
 
@@ -157,7 +180,6 @@ namespace OOP_Dice_Games
             
         }
         // Output leaderboard
-
         public void OutputLeaderboard()
         {
             List<string> leaderboard = GetLeaderboard();
@@ -171,7 +193,34 @@ namespace OOP_Dice_Games
             }
         }
 
+        public void ClearLeaderboard()
+        {
+            File.Delete(path);
+        }
 
+        abstract public void GameSetup();
+
+
+        public void RollDice()
+        {
+            foreach (Die die in diceList)
+            {
+                die.Roll();
+                Console.WriteLine("_ _ _\n|   |\n| {0} |\n|   |\n- - -\n", die.Value);
+            }
+        }
+
+        public List<int> GetDieValue()
+        {
+            List<int> dieValue = new List<int>();
+
+            foreach (Die die in diceList)
+            {
+                dieValue.Add(die.Value);
+            }
+
+            return dieValue;
+        }
         // Run on game creation
         /*
         public Game()

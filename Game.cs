@@ -14,7 +14,6 @@ namespace OOP_Dice_Games
         /// Generic game class contain things all games will need or may only vary
         /// </summary>
 
-
         public List<Die> diceList = new List<Die>();
 
 
@@ -215,7 +214,7 @@ namespace OOP_Dice_Games
             foreach (Die die in diceList)
             {
                 die.Roll();
-                Console.WriteLine("_ _ _\n|   |\n| {0} |\n|   |\n- - -\n", die.Value);
+                Console.WriteLine(" - - -\n|     |\n|  {0}  |\n|     |\n - - -\n", die.Value);
             }
         }
 
@@ -230,10 +229,14 @@ namespace OOP_Dice_Games
 
             return dieValue;
         }
-        // Run on game creation
+
+
+        // Run on class creation
         /*
-        public Game()
+        public Game() replace with classname
         {
+
+            Game funcition
 
             _NewDie(6, 2);
 

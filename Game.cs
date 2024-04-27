@@ -81,7 +81,7 @@ namespace OOP_Dice_Games
         {
             for(int i = 0; i < numberOfDie; i++) 
             {
-                string name = "Die" + (i + 1);
+                string name = "Die" + (diceList.Count+1);
 
                 diceList.Add(new Die(Sides,name));
             }

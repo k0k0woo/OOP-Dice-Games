@@ -11,7 +11,7 @@ namespace OOP_Dice_Games
     internal class Rollgame:Game
     {
 
-        public Int16 rollsLeft = 50;
+        public Int16 rollsLeft = 100;
 
         public Int64 Score = 0;
         public Int64 HighestScore = 0;
@@ -28,11 +28,9 @@ namespace OOP_Dice_Games
                 RollDice(false);
                 UpdateScore(GetDiceTotal());
                 DisplayDice();
+                rollsLeft -= 1;
+                totalRolls += 1;
 
-            }
-            else
-            {
-                GameOver(Score);
             }
         }
 
@@ -56,7 +54,7 @@ namespace OOP_Dice_Games
 
         private void DisplayUserActions()
         {
-            Console.WriteLine("1-Roll | 2-Upgrades | 3-Shop | 4-Dice\n");
+            Console.WriteLine("1-Roll | 2-Shop | 3-Upgrades | 4-Dice\n");
         }
         private Int64 GetDiceTotal()
         {
@@ -96,7 +94,7 @@ namespace OOP_Dice_Games
         {
             DisplayRollsAndScore();
             DisplayUserActions();
-
+            
 
             int playerAction = CheckInputInt(Console.ReadLine());
 
@@ -108,8 +106,9 @@ namespace OOP_Dice_Games
 
 
             if(playerAction == 1)
-            {
+            { 
                 PlayerRoll();
+                shop.UpdateShop(this);
             }else if(playerAction == 2)
             {
                 ShopOpen();
@@ -125,6 +124,34 @@ namespace OOP_Dice_Games
         public void ShopOpen()
         {
             shop.OutputShop(this);
+
+            var userInp = Console.ReadLine();
+
+            int intUserInp = CheckInputInt(userInp);
+
+            while (intUserInp > shop.shopslots || intUserInp < 0)
+            {
+                intUserInp = CheckInputInt(Console.ReadLine());
+            }
+
+            if (intUserInp == 0)
+            {
+                // Exit shop
+            }
+
+            else
+            {
+                Upgrade upgrade = shop.upgrades[intUserInp-1];
+
+                if(Score > upgrade.Cost)
+                {
+                    Score -= upgrade.Cost;
+                    upgrade.ApplyUpgrade(this);
+                }else if (Score < upgrade.Cost)
+                {
+                    Console.WriteLine("\nNot enough score!");
+                }
+            }
         }
 
 
@@ -150,8 +177,13 @@ namespace OOP_Dice_Games
             UpdateFilePath();
 
             GameSetup();
-            
+
+            while(CheckRollsValid())
+            {
             PlayerTurn();
+            }
+            GameOver(Score);
+
         }
     }
 }

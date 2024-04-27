@@ -22,7 +22,6 @@ namespace OOP_Dice_Games
         private int _Value;
 
 
-
         // Properties
         public int Value { get { return _Value; } set { _Value = value; } }
         public string name { get { return _name; } set { _name = value; } }

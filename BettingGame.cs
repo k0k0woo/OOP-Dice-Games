@@ -100,7 +100,7 @@ namespace OOP_Dice_Games
 
                 Console.WriteLine("You will win if any die has the number {0}", InpNumber);
 
-                RollDice();
+                RollDice(true);
 
                 if (BetNumberCheck())
                 {
@@ -114,7 +114,7 @@ namespace OOP_Dice_Games
             else if(betType == 2)
             {
                 // check if double
-                RollDice();
+                RollDice(true);
 
                 if (DiceDoubleCheck())
                 {
@@ -138,7 +138,7 @@ namespace OOP_Dice_Games
                 betNumber = InpNumber;
                 Console.WriteLine("You will win if 2 die have the number {0}", InpNumber);
 
-                RollDice();
+                RollDice(true);
 
                 if(BetNumberCheck() && DiceDoubleCheck()) 
                 {

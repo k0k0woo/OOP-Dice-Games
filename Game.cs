@@ -125,7 +125,7 @@ namespace OOP_Dice_Games
             return leaderboardlist;
         }
         // Update leaderboard
-        public void UpdateLeaderboard(string name, int score)
+        public void UpdateLeaderboard(string name, Int64 score)
         {
             List<string> leaderboard = GetLeaderboard();
 
@@ -136,7 +136,7 @@ namespace OOP_Dice_Games
                 foreach (string player in leaderboard.ToList())
                 {
                     string[] splitPlayer = player.Split(' ');
-                    if (Int32.Parse(splitPlayer[1]) < score)
+                    if (Int64.Parse(splitPlayer[1]) < score)
                     {
                         leaderboard.Insert(leaderboard.IndexOf(player), newPlayer);
                         File.WriteAllLines(path, leaderboard);
@@ -199,7 +199,7 @@ namespace OOP_Dice_Games
 
         abstract public void GameSetup();
 
-        public void GameOver(int score)
+        public void GameOver(Int64 score)
         {
             GetName();
             UpdateLeaderboard(name, score);
@@ -209,12 +209,15 @@ namespace OOP_Dice_Games
             OutputLeaderboard();
         }
 
-        public void RollDice()
+        public void RollDice(bool display)
         {
             foreach (Die die in diceList)
             {
                 die.Roll();
-                Console.WriteLine(" - - -\n|     |\n|  {0}  |\n|     |\n - - -\n", die.Value);
+                if (display)
+                {
+                    Console.WriteLine("{0}\n - - -\n|     |\n|  {1}  |\n|     |\n - - -\n", die.name, die.Value);
+                }
             }
         }
 

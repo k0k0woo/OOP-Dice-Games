@@ -54,7 +54,7 @@ namespace OOP_Dice_Games
 
         private void DisplayUserActions()
         {
-            Console.WriteLine("1-Roll | 2-Shop | 3-Upgrades | 4-Dice\n");
+            Console.WriteLine("1-Roll | 2-Shop | 3-Upgrades | 4-Dice | 5-Quit\n");
         }
         private Int64 GetDiceTotal()
         {
@@ -98,7 +98,7 @@ namespace OOP_Dice_Games
 
             int playerAction = CheckInputInt(Console.ReadLine());
 
-            while(playerAction < 1 || playerAction > 4) 
+            while(playerAction < 1 || playerAction > 5) 
             {
                 Console.WriteLine("Invalid input");
                 playerAction = CheckInputInt(Console.ReadLine());
@@ -112,6 +112,20 @@ namespace OOP_Dice_Games
             }else if(playerAction == 2)
             {
                 ShopOpen();
+            }
+            else if(playerAction == 3)
+            {
+
+            }else if(playerAction == 4)
+            {
+                Console.WriteLine("\n\n#######     DICE    #######\n\n");
+                DisplayDice();
+                Console.WriteLine("\n\n##############################\n\n");
+
+
+            }else if(playerAction == 5)
+            {
+                rollsLeft = 0;
             }
         }
 

@@ -112,8 +112,8 @@ namespace OOP_Dice_Games
                 PlayerRoll();
             }else if(playerAction == 2)
             {
-                ShopOpen()
-            };
+                ShopOpen();
+            }
         }
 
         public void setUpShop()

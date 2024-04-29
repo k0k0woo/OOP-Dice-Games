@@ -12,8 +12,8 @@ namespace OOP_Dice_Games
         private int addValue = new Random(Guid.NewGuid().GetHashCode()).Next(1, 10);
         public override void SetCost()
         {
-            BaseCost = 4* addValue-3;
-            costMulti = 0.0003D;
+            BaseCost = 4* addValue-2;
+            costMulti = 0.0005D;
         }
         public override void SetName()
         {

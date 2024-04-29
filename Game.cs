@@ -8,42 +8,54 @@ using System.Runtime.CompilerServices;
 
 namespace OOP_Dice_Games
 {
+    /// <summary>
+    /// Generic class Game
+    /// </summary>
     abstract class Game
     {
+        // Variables
+
+        public List<Die> diceList = new List<Die>(); // Create a list of dice
+
+
+        public string path = @"C:\Users\Joshi\Documents\Leaderboard.txt"; // leaderboard folder path
+
+        public string name = ""; // users name for leaderboard
+
         /// <summary>
-        /// Generic game class contain things all games will need or may only vary
+        /// Updates the filepath (mainly so different games can use different leaderboards)
         /// </summary>
-
-        public List<Die> diceList = new List<Die>();
-
-
-        public string path = @"C:\Users\Joshi\Documents\Leaderboard.txt";
-
-        public string name = "";
-
-        // Will be used to change the path
         public abstract void UpdateFilePath();
 
+        /// <summary>
+        /// Get the username for the leaderboard.
+        /// </summary>
         public void GetName()
         {
-            Console.WriteLine("Enter Your Name (Max-16-Character):");
+            
+            Console.WriteLine("Enter Your Name (Max-16-Character):");// tell user for input
 
-            string INPname = Console.ReadLine();
+            string INPname = Console.ReadLine();// store input
 
-            if (ValidateName(INPname))
+            if (ValidateName(INPname)) // ensure name fits criteria
             {
-                name = INPname;
+                name = INPname; // update name
             }
             else
             {
-                Console.WriteLine("{0} is an invalid name.", INPname);
-                GetName();
+                Console.WriteLine("{0} is an invalid name.", INPname);// tell user that name invalid
+                GetName();// recursive function
             }
         }
 
+        /// <summary>
+        /// Checks that string length is 1-16 characters long
+        /// </summary>
+        /// <param name="VALname">input string (leaderboard name)</param>
+        /// <returns>bool</returns>
         private bool ValidateName(string VALname)
         {
-            if(VALname.Length > 16 || VALname.Length < 1)
+            if(VALname.Length > 16 || VALname.Length < 1) // is string length between 1-16
             {
                 return false;
             }
@@ -53,21 +65,25 @@ namespace OOP_Dice_Games
             }
         }
 
-
+        /// <summary>
+        /// Check that input is a number
+        /// </summary>
+        /// <param name="number">the string input</param>
+        /// <returns>the number as integer</returns>
         public int CheckInputInt(string number)
         {
             
             int Output;
 
-            bool CheckInt = int.TryParse(number, out Output);
+            bool CheckInt = int.TryParse(number, out Output);// check input is integer
 
-            while (CheckInt == false)
+            while (CheckInt == false) // while input is not integer
             {
-                Console.WriteLine("{0} is an invalid input", number);
+                Console.WriteLine("{0} is an invalid input", number);// tell user invalid
                 
                 Console.WriteLine("Input: ");
-                var num = Console.ReadLine();
-                CheckInt = int.TryParse(num, out Output);
+                var num = Console.ReadLine();// store new input
+                CheckInt = int.TryParse(num, out Output);// check new input is an integer
 
             }
             return Output;

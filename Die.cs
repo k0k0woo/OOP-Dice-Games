@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOP_Dice_Games
 {
+    /// <summary>
+    /// Die class
+    /// function to roll die and variable to store result
+    /// </summary>
     internal class Die
     {
-        /// <summary>
-        /// A Dice that will roll and store a random number
-        /// </summary>
+        // Variable
+        private int _Minroll = 1; // min value the die can roll
 
+        private int _Maxroll = 7; // 1 higher than the max value a die can roll
 
-        // Variables
-        private int _Minroll = 1;
-        private int _Maxroll = 7;
-        private string _name = "Die";
-        private int _Value;
+        private string _name = "Die"; // the die's name
+
+        private int _Value; // the stored value from a roll
 
 
         // Properties
@@ -29,14 +25,20 @@ namespace OOP_Dice_Games
         public int Minroll { get { return _Minroll; } set { _Minroll = value; } }
         public int Maxroll { get { return _Maxroll; } set { _Maxroll = value; } }
 
-        // Init function
+        /// <summary>
+        /// Run of die creation
+        /// </summary>
+        /// <param name="NumberOfsides">integer (max-value a die can roll)</param>
+        /// <param name="newname">The die's name</param>
         public Die(int NumberOfsides,string newname)
         {
             Maxroll = NumberOfsides+1;
             name = newname;
         } 
 
-        // Roll function
+        /// <summary>
+        /// Update value to new random number within limits of max-roll and min-roll
+        /// </summary>
         public void Roll()
         {
             Value = new Random(Guid.NewGuid().GetHashCode()).Next(Minroll, Maxroll);

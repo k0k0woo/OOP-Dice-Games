@@ -32,7 +32,7 @@ namespace OOP_Dice_Games
 
         public void CalcCost(Int64 HighScore, Int16 totalRolls)
         {
-            Cost = Convert.ToInt64(BaseCost+Math.Pow(costMulti * HighScore/5 * totalRolls,1.5));
+            Cost = Convert.ToInt64(BaseCost+Math.Pow(costMulti * HighScore/2.5 * totalRolls,1.5));
         }
         
         public Upgrade()

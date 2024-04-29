@@ -11,7 +11,7 @@ namespace OOP_Dice_Games
         private int addValue = new Random(Guid.NewGuid().GetHashCode()).Next(1, 10);
         public override void SetCost()
         {
-            BaseCost = 4 * addValue-3;
+            BaseCost = 4 * addValue-2;
             costMulti = 0.0005D;
         }
         public override void SetName()
@@ -41,7 +41,7 @@ namespace OOP_Dice_Games
                 dieChoice = Console.ReadLine();
                 intDie = game.CheckInputInt(dieChoice);
             }
-            if (game.diceList[intDie - 1].Minroll + addValue > game.diceList[intDie - 1].Maxroll)
+            if (game.diceList[intDie - 1].Minroll + addValue >= game.diceList[intDie - 1].Maxroll)
             {
                 Console.WriteLine("Taken min roll to max..");
                 game.diceList[intDie - 1].Minroll = game.diceList[intDie - 1].Maxroll-1;

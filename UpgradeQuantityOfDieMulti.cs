@@ -13,8 +13,8 @@ namespace OOP_Dice_Games
 
         public override void SetCost()
         {
-            BaseCost = 50;
-            costMulti = 0.0015D;
+            BaseCost = 35;
+            costMulti = 0.00125D;
             GlobalMulti = 0.01M;
         }
         public override void SetName()
@@ -24,7 +24,7 @@ namespace OOP_Dice_Games
 
         public override void SetDescription()
         {
-            description = "Multiply score by 1.01(1%) per dice";
+            description = "Multiply score by 1.10(10%) per dice";
         }
         public override void ApplyUpgrade(Rollgame game)
         {

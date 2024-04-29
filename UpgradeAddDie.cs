@@ -10,8 +10,8 @@ namespace OOP_Dice_Games
     {
         public override void SetCost()
         {
-            BaseCost = 25;
-            costMulti = 0.00125D;
+            BaseCost = 35;
+            costMulti = 0.0035D;
         }
         public override void SetName()
         {

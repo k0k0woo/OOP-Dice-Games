@@ -10,6 +10,7 @@ namespace OOP_Dice_Games
     internal class UpgradeShop
     {
         public int shopslots = 3;
+        public int MaxShopslots = 3;
         public List<Upgrade> upgrades = new List<Upgrade>();
 
         public void GetNewUpgrade()
@@ -42,13 +43,18 @@ namespace OOP_Dice_Games
             if(game.totalRolls % 10 == 0)
             {
                 shopslots = 3 + (game.totalRolls/10);
+                MaxShopslots = 3 + (game.totalRolls / 10);
+            }
+            else if(game.totalRolls % 5 == 0)
+            {
+                shopslots = MaxShopslots;
             }
         }
 
         public void RefreshUpgardes(Rollgame game) 
         {
             upgrades = new List<Upgrade>();
-            for(int i = 0;i < shopslots; i++)
+            for (int i = 0;i < shopslots; i++)
             {
                 GetNewUpgrade();
             }

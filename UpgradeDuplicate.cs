@@ -12,9 +12,9 @@ namespace OOP_Dice_Games
 
         public override void SetCost()
         {
-            BaseCost = 45;
-            costMulti = 0.0015D;
-            GlobalMulti = 0.05M;
+            BaseCost = 50;
+            costMulti = 0.001D;
+            GlobalMulti = 0.03M;
         }
         public override void SetName()
         {
@@ -23,7 +23,7 @@ namespace OOP_Dice_Games
 
         public override void SetDescription()
         {
-            description = "Multiply score by 1.05(5%) if a duplicate roll occurs(e.g double 6's) only occurs for highest duplicate.";
+            description = "Multiply score by 1.30(30%) if a duplicate roll occurs(e.g double 6's) only occurs for highest duplicate.";
         }
         public override void ApplyUpgrade(Rollgame game)
         {

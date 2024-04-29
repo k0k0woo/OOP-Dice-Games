@@ -61,8 +61,8 @@ namespace OOP_Dice_Games
         {
             Int64 total = 0;
             List<int> values = new List<int>();
-            decimal dieQuantityMuli = 1.00M;
-            decimal duplicateResultMulti = 1.00M;
+            decimal dieQuantityMuli = 1.000M;
+            decimal duplicateResultMulti = 1.000M;
 
             foreach (Die die in diceList)
             {
@@ -91,22 +91,23 @@ namespace OOP_Dice_Games
                     }
                 }
             }
-
-            foreach(Die die in diceList)
+            decimal tempQunatmulti = dieQuantityMuli;
+            decimal tempDupemulti = duplicateResultMulti;
+            foreach (Die die in diceList)
             {
-                dieQuantityMuli = Math.Round(dieQuantityMuli * dieQuantityMuli,2);
+                dieQuantityMuli = Math.Round(dieQuantityMuli * tempQunatmulti,3);
             }
             for(int i = 0; i < duplicate.Count(); i++)
             {
-                duplicateResultMulti =Math.Round(duplicateResultMulti * duplicateResultMulti,2);
+                duplicateResultMulti =Math.Round(duplicateResultMulti * tempDupemulti,3);
             }
 
 
             decimal globalMulti = dieQuantityMuli * duplicateResultMulti;
 
-            Math.Round(globalMulti, 2);
-            Math.Round(duplicateResultMulti, 2);
-            Math.Round(dieQuantityMuli, 2);
+            Math.Round(globalMulti, 3);
+            Math.Round(duplicateResultMulti, 3);
+            Math.Round(dieQuantityMuli, 3);
 
             Console.WriteLine("\n\nThe roll x (total quantity multi x total duplicateMulti) = Total");
             Console.WriteLine("{0} x ({1} x {2}) = {3}\n\n",total, dieQuantityMuli, duplicateResultMulti, Convert.ToInt64(total * globalMulti));
@@ -125,10 +126,43 @@ namespace OOP_Dice_Games
 
         public void DisplayDice()
         {
-            foreach(Die die in diceList)
+            Console.WriteLine("\n\n#######     DICE    #######\n\n");
+
+            foreach (Die die in diceList)
             {
                 Console.WriteLine("{0}\n - - -\n|     |\n|  {1}  |\n|     |\n - - -\nMin:{2}    Max:{3}\n", die.name, die.Value,die.Minroll,die.Maxroll-1);
             }
+            Console.WriteLine("\n\n##############################\n\n");
+        }
+
+        public void DisplayUpgrades()
+        {
+            int quantUPgrades = 0;
+            decimal quantmulti = 1;
+            int dupeUPgrades = 0;
+            decimal dupemulti = 1;
+            foreach (Upgrade upgrade in GlobalUpgrades)
+            {
+                if (upgrade.Name == "Quantity die Multi")
+                {
+                    quantUPgrades ++;
+                    quantmulti = quantUPgrades * (1 + upgrade.GlobalMulti);
+                }
+                else if (upgrade.Name == "Duplicate multi")
+                {
+
+                        dupeUPgrades++;
+                    dupemulti = dupeUPgrades * (1 + upgrade.GlobalMulti);
+                    
+                }
+            }
+
+            Console.WriteLine("\n############## GLOBAL UPGRADES ##############\n");
+
+            Console.WriteLine("Quantity die upgrade count = {0} this is a {1} multiplier per die.", quantUPgrades, quantmulti);
+            Console.WriteLine("Duplicate die upgrade count = {0} this is a {1} multiplier for a duplicate result.\n", dupeUPgrades, dupemulti);
+
+            Console.WriteLine("\n#############################################\n\n");
 
         }
         public override void UpdateFilePath()
@@ -161,12 +195,13 @@ namespace OOP_Dice_Games
             }
             else if(playerAction == 3)
             {
-                
-            }else if(playerAction == 4)
+                DisplayUpgrades();
+
+            }
+            else if(playerAction == 4)
             {
-                Console.WriteLine("\n\n#######     DICE    #######\n\n");
                 DisplayDice();
-                Console.WriteLine("\n\n##############################\n\n");
+
 
 
             }else if(playerAction == 5)
@@ -211,6 +246,8 @@ namespace OOP_Dice_Games
                 {
                     Score -= upgrade.Cost;
                     upgrade.ApplyUpgrade(this);
+                    shop.upgrades.Remove(upgrade);
+                    shop.shopslots--;
                 }else if (Score < upgrade.Cost)
                 {
                     Console.WriteLine("\nNot enough score!");

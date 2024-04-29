@@ -14,15 +14,25 @@ namespace OOP_Dice_Games
 
         public void GetNewUpgrade()
         {
-            int num = new Random(Guid.NewGuid().GetHashCode()).Next(0, 2); ;
+            int num = new Random(Guid.NewGuid().GetHashCode()).Next(0, 101); // Out of 100 represent percentage.
 
-            if (num == 0)
+            if (num <= 20)
             {
                 upgrades.Add(new UpgradeAddDie());
 
-            }else if (num == 1)
+            }else if (num >20 && num <= 45)
             {
                 upgrades.Add(new UpgradeIncreaseMaxRoll());
+            }else if (num >45 && num <= 70)
+            {
+                upgrades.Add(new UpgradeIncreaseMinRoll());
+            }else if(num >70 && num <= 85)
+            {
+                upgrades.Add(new UpgradeQuantityOfDieMulti());
+            }
+            else if (num >85 && num <= 100)
+            {
+                upgrades.Add(new UpgradeDuplicate());
             }
 
         }
@@ -31,7 +41,7 @@ namespace OOP_Dice_Games
         {
             if(game.totalRolls % 10 == 0)
             {
-                shopslots = 3 + game.totalRolls % 10;
+                shopslots = 3 + (game.totalRolls/10);
             }
         }
 

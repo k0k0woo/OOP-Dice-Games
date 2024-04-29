@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace OOP_Dice_Games
 {
-    internal class UpgradeIncreaseMaxRoll:Upgrade
+    internal class UpgradeIncreaseMinRoll:Upgrade
     {
         private int addValue = new Random(Guid.NewGuid().GetHashCode()).Next(1, 10);
         public override void SetCost()
         {
-            BaseCost = 4* addValue-3;
-            costMulti = 0.0003D;
+            BaseCost = 4 * addValue-3;
+            costMulti = 0.0005D;
         }
         public override void SetName()
         {
-            Name = "Add "+addValue+" side to die";
+            Name = "Increases the minimal result a die can have by " + addValue + " (Will top out at die max roll).";
         }
 
         public override void SetDescription()
         {
-            description = "Allows die to roll "+addValue+" higher (turns 6-sided dice into 7-sided)";
+            description = "For example a normal 6-sided die with a minimal roll increase of 1 now will roll 2-6 intstead.";
         }
         public override void ApplyUpgrade(Rollgame game)
         {
@@ -42,9 +41,15 @@ namespace OOP_Dice_Games
                 dieChoice = Console.ReadLine();
                 intDie = game.CheckInputInt(dieChoice);
             }
-
-            game.diceList[intDie-1].Maxroll += addValue;
-
+            if (game.diceList[intDie - 1].Minroll + addValue > game.diceList[intDie - 1].Maxroll)
+            {
+                Console.WriteLine("Taken min roll to max..");
+                game.diceList[intDie - 1].Minroll = game.diceList[intDie - 1].Maxroll-1;
+            }
+            else
+            {
+                game.diceList[intDie - 1].Minroll += addValue;
+            }
             Console.WriteLine("....Completed.....");
 
             Console.WriteLine("The updated die");

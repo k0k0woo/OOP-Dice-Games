@@ -51,7 +51,10 @@
     <Compile Include="Rollgame.cs" />
     <Compile Include="Upgrade.cs" />
     <Compile Include="UpgradeAddDie.cs" />
+    <Compile Include="UpgradeDuplicate.cs" />
     <Compile Include="UpgradeIncreaseMaxRoll.cs" />
+    <Compile Include="UpgradeIncreaseMinRoll.cs" />
+    <Compile Include="UpgradeQuantityOfDieMulti.cs" />
     <Compile Include="UpgradeShop.cs" />
   </ItemGroup>
   <ItemGroup>

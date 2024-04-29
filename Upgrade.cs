@@ -20,7 +20,7 @@ namespace OOP_Dice_Games
         private string _description;
         public string description { get { return _description; } set { _description = value; } }
 
-
+        public decimal GlobalMulti = 0M;
         abstract public void ApplyUpgrade(Rollgame game);
 
         abstract public void SetName();
@@ -32,7 +32,7 @@ namespace OOP_Dice_Games
 
         public void CalcCost(Int64 HighScore, Int16 totalRolls)
         {
-            Cost = Convert.ToInt64(BaseCost+Math.Pow(costMulti * HighScore * totalRolls,2));
+            Cost = Convert.ToInt64(BaseCost+Math.Pow(costMulti * HighScore/5 * totalRolls,1.5));
         }
         
         public Upgrade()

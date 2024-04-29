@@ -20,6 +20,7 @@ namespace OOP_Dice_Games
 
         public UpgradeShop shop = new UpgradeShop();
 
+        public List<Upgrade> GlobalUpgrades = new List<Upgrade>();
 
         private void PlayerRoll()
         {
@@ -49,7 +50,7 @@ namespace OOP_Dice_Games
 
         private void DisplayRollsAndScore()
         {
-            Console.WriteLine("You have {0} rolls left | Current Score{1}", rollsLeft, Score);
+            Console.WriteLine("You have {0} rolls left | Current Score = {1}", rollsLeft, Score);
         }
 
         private void DisplayUserActions()
@@ -59,12 +60,57 @@ namespace OOP_Dice_Games
         private Int64 GetDiceTotal()
         {
             Int64 total = 0;
+            List<int> values = new List<int>();
+            decimal dieQuantityMuli = 1.00M;
+            decimal duplicateResultMulti = 1.00M;
+
             foreach (Die die in diceList)
             {
+                values.Add( die.Value );
                 total += die.Value;
             }
 
-            return total;
+            IGrouping<int, int> duplicate =
+              values.GroupBy(n => n)
+              .OrderByDescending(g => g.Count())
+              .First();
+            
+            foreach (Upgrade upgrade in GlobalUpgrades)
+            {
+                if(upgrade.Name == "Quantity die Multi")
+                {
+                    if (diceList.Count > 1)
+                    {
+                        dieQuantityMuli += upgrade.GlobalMulti;
+                    }
+                }else if(upgrade.Name == "Duplicate multi")
+                {
+                    if (duplicate.Count() > 1)
+                    {
+                        duplicateResultMulti += upgrade.GlobalMulti;
+                    }
+                }
+            }
+
+            foreach(Die die in diceList)
+            {
+                dieQuantityMuli = Math.Round(dieQuantityMuli * dieQuantityMuli,2);
+            }
+            for(int i = 0; i < duplicate.Count(); i++)
+            {
+                duplicateResultMulti =Math.Round(duplicateResultMulti * duplicateResultMulti,2);
+            }
+
+
+            decimal globalMulti = dieQuantityMuli * duplicateResultMulti;
+
+            Math.Round(globalMulti, 2);
+            Math.Round(duplicateResultMulti, 2);
+            Math.Round(dieQuantityMuli, 2);
+
+            Console.WriteLine("\n\nThe roll x (total quantity multi x total duplicateMulti) = Total");
+            Console.WriteLine("{0} x ({1} x {2}) = {3}\n\n",total, dieQuantityMuli, duplicateResultMulti, Convert.ToInt64(total * globalMulti));
+            return Convert.ToInt64(total * globalMulti);
         }
 
         private void UpdateScore(Int64 scoreMod)
@@ -115,7 +161,7 @@ namespace OOP_Dice_Games
             }
             else if(playerAction == 3)
             {
-
+                
             }else if(playerAction == 4)
             {
                 Console.WriteLine("\n\n#######     DICE    #######\n\n");
@@ -127,6 +173,7 @@ namespace OOP_Dice_Games
             {
                 rollsLeft = 0;
             }
+
         }
 
         public void setUpShop()
@@ -148,6 +195,9 @@ namespace OOP_Dice_Games
                 intUserInp = CheckInputInt(Console.ReadLine());
             }
 
+
+
+
             if (intUserInp == 0)
             {
                 // Exit shop
@@ -157,7 +207,7 @@ namespace OOP_Dice_Games
             {
                 Upgrade upgrade = shop.upgrades[intUserInp-1];
 
-                if(Score > upgrade.Cost)
+                if(Score >= upgrade.Cost)
                 {
                     Score -= upgrade.Cost;
                     upgrade.ApplyUpgrade(this);

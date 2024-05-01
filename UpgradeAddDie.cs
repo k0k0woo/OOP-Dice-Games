@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOP_Dice_Games
 {
+    /// <summary>
+    /// Add a new die upgrade
+    /// </summary>
     internal class UpgradeAddDie:Upgrade
     {
         public override void SetCost()

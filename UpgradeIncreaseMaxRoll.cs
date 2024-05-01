@@ -7,6 +7,9 @@ using System.Xml.Linq;
 
 namespace OOP_Dice_Games
 {
+    /// <summary>
+    /// Increase maximum roll of a die upgrade
+    /// </summary>
     internal class UpgradeIncreaseMaxRoll:Upgrade
     {
         private int addValue = new Random(Guid.NewGuid().GetHashCode()).Next(1, 10);

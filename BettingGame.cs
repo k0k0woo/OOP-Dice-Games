@@ -8,6 +8,8 @@ namespace OOP_Dice_Games
 {
     /// <summary>
     /// A betting game child class (base class = Game)
+    /// 
+    /// player aims to get as much money as possible by betting on the result of 2 dice.
     /// </summary>
     internal class BettingGame:Game
     {

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOP_Dice_Games
 {
+    /// <summary>
+    /// Add a duplicate global multiplier upgrade
+    /// </summary>
     internal class UpgradeDuplicate:Upgrade
     {
 

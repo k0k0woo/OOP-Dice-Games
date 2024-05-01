@@ -7,6 +7,9 @@ using System.Xml.Linq;
 
 namespace OOP_Dice_Games
 {
+    /// <summary>
+    /// Increase quantity die multiplier upgrade
+    /// </summary>
     internal class UpgradeQuantityOfDieMulti:Upgrade
     {
 

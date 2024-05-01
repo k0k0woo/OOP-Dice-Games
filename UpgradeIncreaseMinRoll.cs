@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOP_Dice_Games
 {
+    /// <summary>
+    /// Increase minimal roll of a die upgrade
+    /// </summary>
     internal class UpgradeIncreaseMinRoll:Upgrade
     {
         private int addValue = new Random(Guid.NewGuid().GetHashCode()).Next(1, 10);

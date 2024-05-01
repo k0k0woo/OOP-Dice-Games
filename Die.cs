@@ -32,8 +32,8 @@ namespace OOP_Dice_Games
         /// <param name="newname">The die's name</param>
         public Die(int NumberOfsides,string newname)
         {
-            Maxroll = NumberOfsides+1;
-            name = newname;
+            Maxroll = NumberOfsides+1; // update max roll
+            name = newname;// update name
         } 
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace OOP_Dice_Games
         /// </summary>
         public void Roll()
         {
-            Value = new Random(Guid.NewGuid().GetHashCode()).Next(Minroll, Maxroll);
+            Value = new Random(Guid.NewGuid().GetHashCode()).Next(Minroll, Maxroll);// get new random number
         }
     }
 }

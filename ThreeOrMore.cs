@@ -145,6 +145,25 @@ namespace OOP_Dice_Games
             }
         }
 
+        public void OutputLeaderboardStats()
+        {
+            List<string> leaderboard = GetLeaderboard();// get leaderboard
+
+            Console.WriteLine("\n\n---------Leaderboard----------");// create seperation
+
+
+            foreach (string player in leaderboard)// for each player
+            {
+                if (leaderboard.IndexOf(player) + 1 <= 10)
+                {
+                    List<string> listplayer = player.Split(':').ToList();
+                    decimal winPercent = decimal.Parse(listplayer[1]) / decimal.Parse(listplayer[2])*100;
+                    winPercent = Math.Round(winPercent, 2);
+
+                    Console.WriteLine("{0} : Player {1} :  Wins {2} : Games {3} : Win Percent {4}", leaderboard.IndexOf(player) + 1, listplayer[0], listplayer[1], listplayer[2],winPercent.ToString()+"%");// output name and score
+                }
+            }
+        }
 
         public void GameOver(string name,bool win)
         {
@@ -164,14 +183,11 @@ namespace OOP_Dice_Games
             Console.ReadKey();
         }
 
-        public ThreeOrMore()
+        public void Start()
         {
-
-            GameSetup();
-
             NewDie(6, 5);
             GetName();
-            Player player1 = new Player(diceList,name,true);
+            Player player1 = new Player(diceList, name, true);
 
             diceList = new List<Die>();
 
@@ -181,27 +197,34 @@ namespace OOP_Dice_Games
 
             diceList = new List<Die>();
 
-            while(checkWin(player1) == false && checkWin(player2) == false)
+            while (checkWin(player1) == false && checkWin(player2) == false)
             {
                 Playerturn(player1, true);
 
                 if (checkWin(player1) == false)
                 {
-                    Playerturn(player2 , true);
+                    Playerturn(player2, true);
                 }
 
             }
             if (checkWin(player1) == false)
             {
-                GameOver(player1.name,false);
+                GameOver(player1.name, false);
 
-            }else if (checkWin(player2) == false)
+            }
+            else if (checkWin(player2) == false)
             {
-                GameOver(player2.name,false);
+                GameOver(player2.name, false);
             }
 
             OutputLeaderboard();
             Console.WriteLine("Game Saved...");
+        }
+
+        public ThreeOrMore()
+        {
+
+            GameSetup();
 
         }
     }

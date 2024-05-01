@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OOP_Dice_Games
@@ -70,16 +71,19 @@ namespace OOP_Dice_Games
             }
         }
         
-        public SevensOut()
-        {
-            GameSetup();
 
+        public void Start()
+        { 
             while (CheckIfSeven(DieTotal) == false)
             {
                 Gameloop();
                 Console.WriteLine("\n\nPress key to continue.....");
                 Console.ReadKey();
             }
+        }
+        public SevensOut()
+        {
+            GameSetup();
 
         }
     }

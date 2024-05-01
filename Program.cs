@@ -44,7 +44,7 @@ namespace OOP_Dice_Games
             int intINP;
             bool check = int.TryParse(inp, out intINP); // validate input
 
-            while (check == false || (intINP < 1 || intINP > 4)) // while input is a number not 1 or 2
+            while (check == false || (intINP < 1 || intINP > 5)) // while input is a number not 1 or 2
             {
                 Console.WriteLine("\nEnter | 1 - BettingGame | 2 - RollingGame | 3-Sevens Out | 4-Three or more | 5 - Statistics"); // tell user input choices again
                 Console.WriteLine("\nInvalid input try again..\n");// tell user they inputed incorrect number
@@ -79,11 +79,18 @@ namespace OOP_Dice_Games
             {
                 Console.WriteLine("Sevens Out Selected ........\n\n");
                 SevensOut sevensOut = new SevensOut();
+                sevensOut.Start();
             }
             else if (Game == 4)
             {
                 Console.WriteLine("Three or more Selected ........\n\n");
                 ThreeOrMore threeOrMore = new ThreeOrMore();
+                threeOrMore.Start();
+            }
+            else if(Game == 5)
+            {
+                statisitcs stats = new statisitcs();
+
             }
             else
             {

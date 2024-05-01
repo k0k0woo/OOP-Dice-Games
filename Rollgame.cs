@@ -145,9 +145,9 @@ namespace OOP_Dice_Games
             decimal globalMulti = dieQuantityMuli * duplicateResultMulti;
 
             // Round all values
-            Math.Round(globalMulti, 3);
-            Math.Round(duplicateResultMulti, 3);
-            Math.Round(dieQuantityMuli, 3);
+            globalMulti = Math.Round(globalMulti, 3);
+            duplicateResultMulti = Math.Round(duplicateResultMulti, 3);
+            dieQuantityMuli = Math.Round(dieQuantityMuli, 3);
 
             // Output values to player
             Console.WriteLine("\n\nThe roll x (total quantity multi x total duplicateMulti) = Total");

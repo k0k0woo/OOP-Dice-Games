@@ -38,15 +38,15 @@ namespace OOP_Dice_Games
         static int ChooseGame()
         {
 
-            Console.WriteLine("Enter | 1 - BettingGame | 2 - RollingGame |");// tell user input choices
+            Console.WriteLine("Enter | 1 - BettingGame | 2 - RollingGame | 3-Sevens Out | 4-Three or more | 5 - Statistics");// tell user input choices
 
             string inp = Console.ReadLine(); // get and store input
             int intINP;
             bool check = int.TryParse(inp, out intINP); // validate input
 
-            while (check == false || (intINP < 1 || intINP > 2)) // while input is a number not 1 or 2
+            while (check == false || (intINP < 1 || intINP > 4)) // while input is a number not 1 or 2
             {
-                Console.WriteLine("\nEnter | 1 - BettingGame | 2 - RollingGame |"); // tell user input choices again
+                Console.WriteLine("\nEnter | 1 - BettingGame | 2 - RollingGame | 3-Sevens Out | 4-Three or more | 5 - Statistics"); // tell user input choices again
                 Console.WriteLine("\nInvalid input try again..\n");// tell user they inputed incorrect number
                 inp = Console.ReadLine();
                 check = int.TryParse(inp, out intINP); // re-validate input
@@ -75,6 +75,15 @@ namespace OOP_Dice_Games
                 Console.WriteLine("Rolling game selected....\n\n");//tell user the game that is selected
                 Rollgame rollgame = new Rollgame();// create the class to start the game
 
+            }else if (Game == 3)
+            {
+                Console.WriteLine("Sevens Out Selected ........\n\n");
+                SevensOut sevensOut = new SevensOut();
+            }
+            else if (Game == 4)
+            {
+                Console.WriteLine("Three or more Selected ........\n\n");
+                ThreeOrMore threeOrMore = new ThreeOrMore();
             }
             else
             {

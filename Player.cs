@@ -83,28 +83,35 @@ namespace OOP_Dice_Games
             return duplicate.First();
         }
 
-        public void PlayerHold()
+        public void PlayerHold(bool RealPersoncheck)
         {
-            Console.WriteLine("\nDo you want to hold the 2-of-a-kind? y/n");
-            string DieHold = Console.ReadLine().ToString();
-
-            while (DieHold != "y" && DieHold != "n")
+            if (RealPersoncheck)
             {
-                Console.WriteLine("\nInvalid input....");
                 Console.WriteLine("\nDo you want to hold the 2-of-a-kind? y/n");
-                DieHold = Console.ReadLine().ToString();
-            }
+                string DieHold = Console.ReadLine().ToString();
 
-            if(DieHold == "y")
-            {
-                HoldDie = true;
+                while (DieHold != "y" && DieHold != "n")
+                {
+                    Console.WriteLine("\nInvalid input....");
+                    Console.WriteLine("\nDo you want to hold the 2-of-a-kind? y/n");
+                    DieHold = Console.ReadLine().ToString();
+                }
+
+                if (DieHold == "y")
+                {
+                    HoldDie = true;
+                }
+                else
+                {
+                    HoldDie = false;
+                }
+
             }
             else
             {
-                HoldDie= false;
+                HoldDie = true;
+                Console.WriteLine("The bot held a 2-of-a-kind.");
             }
-
-
         }
 
         public void Playerturn(bool Player)
@@ -119,7 +126,7 @@ namespace OOP_Dice_Games
 
                     if (HowMuchOfAKind() == 2)
                     {
-                        PlayerHold();
+                        PlayerHold(RealPerson);
                     }
                     else
                     {
@@ -129,6 +136,26 @@ namespace OOP_Dice_Games
                 }
                 Console.WriteLine("\n{0}'s new points = {1}", name, points);
 
+            }
+            else
+            {
+                Console.WriteLine("\n{0}'s current points = {1}", name, points);
+                RollDice(HoldDie);
+                if (HowMuchOfAKind() > 1)
+                {
+                    Console.WriteLine("\n\nA {0}-of-a-kind is rolled", HowMuchOfAKind());
+
+                    if (HowMuchOfAKind() == 2)
+                    {
+                        PlayerHold(RealPerson);
+                    }
+                    else
+                    {
+                        HoldDie = false;
+                        points += (HowMuchOfAKind() - 2) * 3;
+                    }
+                }
+                Console.WriteLine("\n{0}'s new points = {1}", name, points);
             }
         }
     }

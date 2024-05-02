@@ -183,6 +183,28 @@ namespace OOP_Dice_Games
             Console.ReadKey();
         }
 
+        public bool AgainstAI()
+        {
+            Console.WriteLine("\nDo you want to play against a bot / a friend? y(bot)/n(friend)");
+            string DieHold = Console.ReadLine().ToString();
+
+            while (DieHold != "y" && DieHold != "n")
+            {
+                Console.WriteLine("\nInvalid input....");
+                Console.WriteLine("\nDo you want to play against a bot / a friend? y(bot)/n(friend)");
+                DieHold = Console.ReadLine().ToString();
+            }
+
+            if (DieHold == "y")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public void Start()
         {
             NewDie(6, 5);
@@ -190,20 +212,28 @@ namespace OOP_Dice_Games
             Player player1 = new Player(diceList, name, true);
 
             diceList = new List<Die>();
-
+            
             NewDie(6, 5);
-            GetName();
-            Player player2 = new Player(diceList, name, false);
+            bool ai = AgainstAI();
+            if(ai == true)
+            {
+                GetName();
+            }
+            else
+            {
+                name = "AI BOT";
+            }
+            Player player2 = new Player(diceList, name, ai);
 
             diceList = new List<Die>();
 
             while (checkWin(player1) == false && checkWin(player2) == false)
             {
-                Playerturn(player1, true);
+                Playerturn(player1, player1.RealPerson);
 
                 if (checkWin(player1) == false)
                 {
-                    Playerturn(player2, true);
+                    Playerturn(player2, player2.RealPerson);
                 }
 
             }

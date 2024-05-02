@@ -13,7 +13,7 @@ namespace OOP_Dice_Games
     internal class Program
     {  
 
-
+        
 
         /// <summary>
         /// Main function calls startgame with parameter of choosegame.
@@ -62,7 +62,7 @@ namespace OOP_Dice_Games
         /// <param name="Game">An integer (1/2)</param>
         static void StartGame(int Game)
         {
-            
+            Testing test = new Testing();
             if (Game == 1) // if input == 1
             {
                 // start betting game
@@ -80,6 +80,7 @@ namespace OOP_Dice_Games
                 Console.WriteLine("Sevens Out Selected ........\n\n");
                 SevensOut sevensOut = new SevensOut();
                 sevensOut.Start();
+                test.sevenOutCheck(sevensOut);
             }
             else if (Game == 4)
             {

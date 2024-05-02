@@ -9,10 +9,15 @@ namespace OOP_Dice_Games
 {
     internal class Testing
     {
-
+        
         public void ValueCheck(int Val,int LowVal,int HighVal)
         {
-                Debug.Assert(Val < LowVal || Val > HighVal,"Value incorrect.");
+                Debug.Assert(Val > LowVal || Val < HighVal,"Value incorrect.");
+        }
+
+        public void sevenOutCheck(SevensOut sevenOut)
+        {
+            Debug.Assert(sevenOut.DieTotal == 7);
         }
     }
 }

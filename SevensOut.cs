@@ -9,6 +9,7 @@ namespace OOP_Dice_Games
 {
     internal class SevensOut:Game
     {
+
         public int DieTotal;
         public int score;
 

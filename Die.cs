@@ -17,6 +17,7 @@ namespace OOP_Dice_Games
 
         private int _Value; // the stored value from a roll
 
+        Testing test = new Testing();
 
         // Properties
         public int Value { get { return _Value; } set { _Value = value; } }
@@ -42,6 +43,7 @@ namespace OOP_Dice_Games
         public void Roll()
         {
             Value = new Random(Guid.NewGuid().GetHashCode()).Next(Minroll, Maxroll);// get new random number
+            test.ValueCheck(Value,Minroll,Maxroll-1);
         }
     }
 }
